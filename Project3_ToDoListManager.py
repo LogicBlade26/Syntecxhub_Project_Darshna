@@ -1,6 +1,8 @@
 import json
 import os
+#for storing tasks
 file_name = "tasks.json"
+#load tasks from file
 def load_tasks():
     if os.path.exists(file_name):
         try:
@@ -9,9 +11,11 @@ def load_tasks():
         except:
             return []
     return []
+#saves tasks
 def save_tasks(tasks):
     with open(file_name, "w") as file:
         json.dump(tasks, file, indent=4)
+#adds new task
 def add_task(tasks):
     task_name = input("Enter task: ")
     if task_name == "":
@@ -36,6 +40,7 @@ def add_task(tasks):
     tasks.append(task)
     save_tasks(tasks)
     print("Task added successfully!")
+#displays tasks
 def view_tasks(tasks):
     if len(tasks) == 0:
         print("No tasks available.")
@@ -53,6 +58,7 @@ def view_tasks(tasks):
             "| Priority:", task["priority"],
             "|", status
         )
+#marks when a task is complete
 def complete_task(tasks):
     view_tasks(tasks)
     if len(tasks) == 0:
@@ -67,6 +73,7 @@ def complete_task(tasks):
             print("Invalid task number.")
     except:
         print("Please enter a number.")
+#deletes a task
 def delete_task(tasks):
     view_tasks(tasks)
     if len(tasks) == 0:
@@ -81,6 +88,7 @@ def delete_task(tasks):
             print("Invalid task number.")
     except:
         print("Please enter a number.")
+#searches a task
 def search_task(tasks):
     keyword = input("Enter task name to search: ").lower()
     found = False
@@ -100,6 +108,7 @@ def search_task(tasks):
             found = True
     if found == False:
         print("No task found.")
+#complete/pending task
 def show_statistics(tasks):
     total = len(tasks)
     completed = 0
@@ -114,6 +123,7 @@ def show_statistics(tasks):
     if total > 0:
         percentage = (completed / total) * 100
         print("Completion Rate:", percentage, "%")
+#menu
 def main():
     tasks = load_tasks()
     print("---- To DO Manager ----")
