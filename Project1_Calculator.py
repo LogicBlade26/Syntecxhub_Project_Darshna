@@ -57,4 +57,4 @@ def cal():
             break
         else:
             print("Invalid choice")
-calculator()
+cal()
